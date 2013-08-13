@@ -181,6 +181,7 @@
     <Content Include="Content\Themes\modern.css" />
     <Content Include="Content\Themes\theme-dark.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\dropdown.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
