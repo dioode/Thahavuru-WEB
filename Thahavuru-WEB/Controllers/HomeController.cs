@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Thahavuru_WEB.Models;
 
 namespace Thahavuru_WEB.Controllers
 {
@@ -17,41 +20,32 @@ namespace Thahavuru_WEB.Controllers
             return View();
         }
 
-        public ActionResult ResultImages() 
+        public PartialViewResult ResultImages() 
         {
-            return PartialView();
+            List<ImageModel> ResultImages = new List<ImageModel>();
+
+            ResultImages.Add(new ImageModel());
+            ResultImages.Add(new ImageModel());
+            ResultImages.Add(new ImageModel());
+            ResultImages.Add(new ImageModel());
+
+            return PartialView(ResultImages);
         }
 
-        [HttpPost]
-        public ActionResult AjaxUpload(HttpPostedFileBase file)
+
+        public JsonResult uploadFiles(string ImageName)
         {
-            // TODO: Add your business logic here and/or save the file
+            
+            return Json(true, JsonRequestBehavior.AllowGet);// indexer();
+        }
 
-            // Return JSON
-            //return new FileUploadJsonResult { Data = new { message = string.Format("{0} uploaded successfully.", System.IO.Path.GetFileName(file.FileName)) } };
-            try
-            {
-                //HttpPostedFileBase file = Request.Files[0];
-                byte[] imageSize = new byte[file.ContentLength];
-                file.InputStream.Read(imageSize, 0, (int)file.ContentLength);
-                //Image image = new Image()
-                //{
-                //    Name = file.FileName.Split('\\').Last(),
-                //    Size = file.ContentLength,
-                //    Title = fileTitle,
-                //    ID = 1,
-                //    Image1 = imageSize
-                //};
-                //db.Images.AddObject(image);
-                //db.SaveChanges();
-                //return RedirectToAction("Detail");
-            }
-            catch (Exception e)
-            {
-                ModelState.AddModelError("uploadError", e);
-            }
+        public ActionResult Upload(HttpPostedFileBase FileData, FormCollection forms)
+        {
+            var file = Request.Files["Filedata"];
+            string savePath = Server.MapPath(@"~\Content\" + file.FileName);
+            file.SaveAs(savePath);
 
-            return RedirectToAction("Index");// indexer();
+            return Content(Url.Content(@"~\Content\" + file.FileName));
         }
 
     }

@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Core\SessionDataManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -181,9 +182,15 @@
     <Content Include="Content\Stylesheet\UICSS\modern-responsive.css" />
     <Content Include="Content\Stylesheet\UICSS\modern.css" />
     <Content Include="Content\Stylesheet\UICSS\theme-dark.css" />
+    <Content Include="Scripts\Uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\Uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\Uploadify\swfobject.js" />
+    <Content Include="Content\Images\cancel.png" />
+    <Content Include="Content\Stylesheet\Uploadify\uploadify.css" />
     <Content Include="Content\Themes\modern-responsive.css" />
     <Content Include="Content\Themes\modern.css" />
     <Content Include="Content\Themes\theme-dark.css" />
+    <Content Include="Content\UploadifySwf\uploadify.swf" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
