@@ -5,8 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>THAHAVURU Face Recognition</title>
-<link href="@Url.Content("~/Content/Themes/modern.css")" rel="stylesheet" type="text/css" />
-<script src="@Url.Content("~/Scripts/dropdown.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/Stylesheet/UICSS/modern.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/UIScript/dropdown.js")" ></script>
+
+<link href="@Url.Content("~/Content/Stylesheet/Uploadify/uploadify.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/Uploadify/jquery.uploadify.min.js")" ></script>
+<script src="@Url.Content("~/Scripts/Uploadify/jquery.uploadify.js")"></script>
+
 <style type="text/css">
 body {
 	margin:0px 0px; padding:0px;
@@ -22,10 +29,93 @@ body {
 	background-color:#eee;
 	}
 </style>
+
+@*    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ImgResultPanel").load('@Url.Action("ResultImages", "Home")');
+            $("input").change(function (e) {
+
+                for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+                    var file = e.originalEvent.srcElement.files[i];
+
+                    var img = document.getElementById("inputImage");
+                    img.height = 105;
+                    //img.width = 220;
+
+                    var reader = new FileReader();
+                    reader.onloadend = function () {
+                        img.src = reader.result;
+                    }
+                    reader.readAsDataURL(file);
+                    //$("#ImageDiv").after(img);
+                    //$("#inputImage").attr(img);
+                    //$("#inputImage").css("visibility", "collapse");
+                }
+            });
+        });
+    </script>*@
+
+<script type="text/javascript">
+    $(function () {
+        $('#file_upload').uploadify({
+            'auto': false,
+            'swf': "@Url.Content("~/Content/UploadifySwf/uploadify.swf")",
+            'uploader': "@Url.Action("Upload", "Home")",
+            'uploadLimit' : 1,
+            'onSelect': function (event, ID, fileObj) {
+                alert(event.srcElement.files.length);
+                for (var i = 0; i < event.originalEvent.srcElement.files.length; i++) {
+                    var file = event.originalEvent.srcElement.files[i];
+
+                    var img = document.getElementById("inputImage");
+                    img.height = 105;
+                    //img.width = 220;
+
+                    var reader = new FileReader();
+                    reader.onloadend = function () {
+                        img.src = reader.result;
+                    }
+                    reader.readAsDataURL(file);
+                    //$("#ImageDiv").after(img);
+                    //$("#inputImage").attr(img);
+                    //$("#inputImage").css("visibility", "collapse");
+                }
+                
+            },
+            'onUploadSuccess': function (file, data, response) {
+                var img = document.getElementById("inputImage");
+                img.src = null;
+                img.src = data;
+
+                $('#file_upload').uploadify('cancel', '*');
+                
+            }
+        });
+    });
+
+
+    function RecognizeImage()
+    {
+        @*var url = '@Url.Action("uploadFiles", "Home")';
+        var img = document.getElementById("inputImage");
+        if (img != null) {
+            $.get(url, { ImageName: img.src.Name }, function (data) {
+                //Do whatever u waht with response "Data"
+                if (data == true) {
+                    $("#ImgResultPanel").load('@Url.Action("ResultImages", "Home")');
+                }
+            });
+        }*@
+
+        $('#file_upload').uploadify('upload', '*');
+    }
+ </script>
+
+    
 </head>
 
 <body class="metrouicss">
-    <div id="Content" >
+    <div id="Content" style="height:800px">
         <div class="page">
             <div class="page-header" style="height:60px">
                 <div class="page-header-content" >
@@ -62,27 +152,51 @@ body {
                     </div>*@
                     
                     <div>
-                        <h1>Upload Image</h1>
+                        <h1>Upload Face Image</h1>
                     </div>
                     <table >
                         <tr>
                             <td style="width:250px; border:0;">
                                 <div class="image-collection p4x3" style="width:170px">
-                                    <div><img id="inputImage"  /></div>
+                                    <div id="ImageDiv">
+                                        <img id="inputImage" style="visibility:visible; max-height:170px; max-width:170px"/>
+                                    </div>
                                 </div>
                             </td>
                             <td  style="border:0;">
-                                @*<div class="image-collection p4x3">
-                                    <div><img id="inputImage"  /></div>
-                                </div>*@
+                                <div id="ajaxUploadForm" >
+                                    @*<button type="button" onclick="document.getElementById('ImageUpload').click();"> Select</button>
+                                    <button id="ajaxUploadButton" type="button" onclick="$('#file_upload').uploadifyUpload();">Upload</button>
+                                    <div><input type="file" id="file_upload" name="file_upload" /></div>*@
+                                    
+                                    
+                                    <input type="file" name="file_upload" id="file_upload" />
+                                    <button onclick="RecognizeImage();"> Recognize </button>
+                                    <div id="uploaded">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <table>
+                        <tr>
+                            <td style="border:0;">
+                                <div class="progress-bar">
+                                    <div class="bar bg-color-blue" style="width: 100%"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border:0;">
+                                <div id="ImgResultPanel">
+
+                                </div>
+                                @*@Html.Partial("ResultImages");*@
                             </td>
                         </tr>
                     </table>
                     
 
-                    <div class="progress-bar">
-                        <div class="bar bg-color-blue" style="width: 100%"></div>
-                    </div>
                 </div>
             </div>
         </div>
