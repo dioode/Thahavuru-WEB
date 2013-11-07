@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Thahavuru_WEB.FaceRecognitionService {
+namespace Thahavuru_WEB.Thahavuru.Services {
     using System.Runtime.Serialization;
     using System;
     
@@ -84,7 +84,7 @@ namespace Thahavuru_WEB.FaceRecognitionService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Thahavuru_WEB.FaceRecognitionService.InputImage[] ProbeField;
+        private Thahavuru_WEB.Thahavuru.Services.InputImage[] ProbeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -97,7 +97,7 @@ namespace Thahavuru_WEB.FaceRecognitionService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Thahavuru_WEB.FaceRecognitionService.InputImage[] Probe {
+        public Thahavuru_WEB.Thahavuru.Services.InputImage[] Probe {
             get {
                 return this.ProbeField;
             }
@@ -120,23 +120,23 @@ namespace Thahavuru_WEB.FaceRecognitionService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FaceRecognitionService.IThahavuruFaceRecognitionService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Thahavuru.Services.IThahavuruFaceRecognitionService")]
     public interface IThahavuruFaceRecognitionService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IThahavuruFaceRecognitionService/GetMatches", ReplyAction="http://tempuri.org/IThahavuruFaceRecognitionService/GetMatchesResponse")]
-        Thahavuru_WEB.FaceRecognitionService.InputImagesList GetMatches(Thahavuru_WEB.FaceRecognitionService.InputImage probeInfo);
+        Thahavuru_WEB.Thahavuru.Services.InputImagesList GetMatches(Thahavuru_WEB.Thahavuru.Services.InputImage probeInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IThahavuruFaceRecognitionService/GetMatches", ReplyAction="http://tempuri.org/IThahavuruFaceRecognitionService/GetMatchesResponse")]
-        System.Threading.Tasks.Task<Thahavuru_WEB.FaceRecognitionService.InputImagesList> GetMatchesAsync(Thahavuru_WEB.FaceRecognitionService.InputImage probeInfo);
+        System.Threading.Tasks.Task<Thahavuru_WEB.Thahavuru.Services.InputImagesList> GetMatchesAsync(Thahavuru_WEB.Thahavuru.Services.InputImage probeInfo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IThahavuruFaceRecognitionServiceChannel : Thahavuru_WEB.FaceRecognitionService.IThahavuruFaceRecognitionService, System.ServiceModel.IClientChannel {
+    public interface IThahavuruFaceRecognitionServiceChannel : Thahavuru_WEB.Thahavuru.Services.IThahavuruFaceRecognitionService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ThahavuruFaceRecognitionServiceClient : System.ServiceModel.ClientBase<Thahavuru_WEB.FaceRecognitionService.IThahavuruFaceRecognitionService>, Thahavuru_WEB.FaceRecognitionService.IThahavuruFaceRecognitionService {
+    public partial class ThahavuruFaceRecognitionServiceClient : System.ServiceModel.ClientBase<Thahavuru_WEB.Thahavuru.Services.IThahavuruFaceRecognitionService>, Thahavuru_WEB.Thahavuru.Services.IThahavuruFaceRecognitionService {
         
         public ThahavuruFaceRecognitionServiceClient() {
         }
@@ -157,11 +157,11 @@ namespace Thahavuru_WEB.FaceRecognitionService {
                 base(binding, remoteAddress) {
         }
         
-        public Thahavuru_WEB.FaceRecognitionService.InputImagesList GetMatches(Thahavuru_WEB.FaceRecognitionService.InputImage probeInfo) {
+        public Thahavuru_WEB.Thahavuru.Services.InputImagesList GetMatches(Thahavuru_WEB.Thahavuru.Services.InputImage probeInfo) {
             return base.Channel.GetMatches(probeInfo);
         }
         
-        public System.Threading.Tasks.Task<Thahavuru_WEB.FaceRecognitionService.InputImagesList> GetMatchesAsync(Thahavuru_WEB.FaceRecognitionService.InputImage probeInfo) {
+        public System.Threading.Tasks.Task<Thahavuru_WEB.Thahavuru.Services.InputImagesList> GetMatchesAsync(Thahavuru_WEB.Thahavuru.Services.InputImage probeInfo) {
             return base.Channel.GetMatchesAsync(probeInfo);
         }
     }
