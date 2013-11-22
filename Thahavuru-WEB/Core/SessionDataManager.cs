@@ -1,35 +1,19 @@
-﻿///<header>
-///  <title>SessionDataManager</title>
-///  <description>
-///  SessionDataManager
-///  </description>
-///  <copyRight>Copyright (c) 2012</copyRight>
-///  <company>Embla software Innovation (Pvt)Ltd</company>
-///  <createdOn>2012-09-26</createdOn>
-///  <author>Eranda</author>
-///  <Comments></Comments>
-///  <modifiedBy></modifiedBy>
-///  <modifiedDate></modifiedDate>
-///  <description></description>
-///</header>
-
-#region Using directives
+﻿#region Using directives
 
 using System;
 using System.Web;
 
 #endregion
 
-namespace DADAS.Core
+namespace Thahavuru_WEB.Core
 {
     public class SessionDataManager
     {
         [Serializable]
         public enum Key
         {
-            isDay,
-            currentAircraft,
-            maxX
+            probImage,
+            matchingResults
         }
 
         #region Properties

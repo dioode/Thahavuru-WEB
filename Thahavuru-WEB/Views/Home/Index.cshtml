@@ -61,13 +61,14 @@ body {
             'auto': false,
             'swf': "@Url.Content("~/Content/UploadifySwf/uploadify.swf")",
             'uploader': "@Url.Action("Upload", "Home")",
-            'uploadLimit' : 1,
+            //'uploadLimit' : 1,
             'onSelect': function (event, ID, fileObj) {
                 alert(event.srcElement.files.length);
                 for (var i = 0; i < event.originalEvent.srcElement.files.length; i++) {
                     var file = event.originalEvent.srcElement.files[i];
 
                     var img = document.getElementById("inputImage");
+                    img.src = null;
                     img.height = 105;
                     //img.width = 220;
 
@@ -88,6 +89,7 @@ body {
                 img.src = data;
 
                 $('#file_upload').uploadify('cancel', '*');
+                $("#ImgResultPanel").load("/Home/ResultImages");
                 
             }
         });

@@ -10,7 +10,7 @@
         {
             foreach (var item in Model)
             { 
-                <div><img/></div>
+                <div><img src="@Url.Content(item.MatchedImageURI)"/ style="max-height:170px; max-width:170px;"></div>
             }
         }
     @*<div><img/></div>

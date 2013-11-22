@@ -199,7 +199,6 @@
     <Content Include="Content\Themes\theme-dark.css" />
     <Content Include="Content\UploadifySwf\uploadify.swf" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\dropdown.js" />
     <Content Include="Service References\FaceRecognitionService\ThahavuruFaceRecognitionService.disco" />
     <Content Include="Service References\FaceRecognitionService\configuration91.svcinfo" />
     <Content Include="Service References\FaceRecognitionService\configuration.svcinfo" />
