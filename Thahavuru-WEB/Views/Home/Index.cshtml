@@ -117,7 +117,7 @@ body {
 </head>
 
 <body class="metrouicss">
-    <div id="Content" style="height:800px">
+    <div id="Content">
         <div class="page">
             <div class="page-header" style="height:60px">
                 <div class="page-header-content" >
@@ -179,24 +179,28 @@ body {
                             </td>
                         </tr>
                     </table>
-                    
+                    <div class="progress-bar">
+                        <div class="bar bg-color-blue" style="width: 100%"></div>
+                    </div>
                     <table>
                         <tr>
                             <td style="border:0;">
-                                <div class="progress-bar">
-                                    <div class="bar bg-color-blue" style="width: 100%"></div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border:0;">
                                 <div id="ImgResultPanel">
-
                                 </div>
                                 @*@Html.Partial("ResultImages");*@
                             </td>
                         </tr>
+                        <tr>
+                            <td style="border:0">
+                                <button> Back </button>
+                                <button></button>
+                                <button> Next </button>
+                            </td>
+                        </tr>
                     </table>
+                    <div class="progress-bar">
+                        <div class="bar bg-color-blue" style="width: 100%"></div>
+                    </div>
                     
 
                 </div>

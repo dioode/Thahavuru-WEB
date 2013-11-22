@@ -85,13 +85,9 @@ namespace Thahavuru_WEB.Controllers
             ResultImages.Add(img9);
             ResultImages.Add(img10);
             
-
             SessionDataManager SM = new SessionDataManager();
             SM.Clear(SessionDataManager.Key.matchingResults);
             SM.Set(SessionDataManager.Key.matchingResults, ResultImages);
-
-              
-
 
             return Content(Url.Content(@"~\Content\" + file.FileName));
         }
