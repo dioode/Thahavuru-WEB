@@ -204,9 +204,9 @@
     <None Include="Service References\Thahavuru.Services\configuration91.svcinfo" />
     <None Include="Service References\Thahavuru.Services\configuration.svcinfo" />
     <None Include="Service References\Thahavuru.Services\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+        <Generator>WCF Proxy Generator</Generator>
+        <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
