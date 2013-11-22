@@ -90,7 +90,8 @@ namespace Thahavuru_WEB.Controllers
             SM.Clear(SessionDataManager.Key.matchingResults);
             SM.Set(SessionDataManager.Key.matchingResults, ResultImages);
 
-             
+              
+
 
             return Content(Url.Content(@"~\Content\" + file.FileName));
         }
