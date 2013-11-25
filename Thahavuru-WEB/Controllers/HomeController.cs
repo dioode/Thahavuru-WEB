@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Thahavuru_WEB.Core;
+using Thahavuru_WEB.App_Start;
 using Thahavuru_WEB.Models;
 
-namespace Thahavuru_WEB.Controllers
+namespace Test_Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -19,17 +15,31 @@ namespace Thahavuru_WEB.Controllers
 
         public ActionResult Index()
         {
-
             return View();
         }
 
-        public PartialViewResult ResultImages() 
+        public ActionResult Header()
+        {
+            return PartialView();
+        }
+
+        public ActionResult FaceRecognizerIndex()
+        {
+            return PartialView();
+        }
+        public ActionResult Footer()
+        {
+            return PartialView();
+        }
+
+
+        public PartialViewResult ResultImages()
         {
             SessionDataManager SM = new SessionDataManager();
 
             if (SM.IsExists(SessionDataManager.Key.matchingResults) && SM.Get(SessionDataManager.Key.matchingResults) != null)
             {
-                List<ImageModel> ResultImages = (List<ImageModel>)SM.Get(SessionDataManager.Key.matchingResults); 
+                List<ImageModel> ResultImages = (List<ImageModel>)SM.Get(SessionDataManager.Key.matchingResults);
                 return PartialView(ResultImages);
             }
             return PartialView(null);
@@ -38,7 +48,7 @@ namespace Thahavuru_WEB.Controllers
 
         public JsonResult uploadFiles(string ImageName)
         {
-            
+
             return Json(true, JsonRequestBehavior.AllowGet);// indexer();
         }
 
@@ -84,13 +94,12 @@ namespace Thahavuru_WEB.Controllers
             ResultImages.Add(img8);
             ResultImages.Add(img9);
             ResultImages.Add(img10);
-            
+
             SessionDataManager SM = new SessionDataManager();
             SM.Clear(SessionDataManager.Key.matchingResults);
             SM.Set(SessionDataManager.Key.matchingResults, ResultImages);
 
             return Content(Url.Content(@"~\Content\" + file.FileName));
         }
-
     }
 }

@@ -1,16 +1,16 @@
-﻿@model IEnumerable<Thahavuru_WEB.Models.ImageModel>
+﻿@{
+    ViewBag.Title = "ResultImages";
+}
 
-
-<div class="image-collection p4x3">
-
-@using Thahavuru_WEB.Models
+<div class="example">
+    
+    @using Thahavuru_WEB.Models
    
-
         @if (Model != null)
         {
             foreach (var item in Model)
             { 
-                <div><img src="@Url.Content(item.MatchedImageURI)"/ style="max-height:170px; max-width:170px;"></div>
+                <img src="@Url.Content(item.MatchedImageURI)"/ style="max-width:152px;">
             }
         }
     @*<div><img/></div>
