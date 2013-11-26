@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8505b2a6-3393-46d9-b5fe-810c921cd579" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:4039/ThahavuruFaceRecognitionService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ThahavuruFaceRecognitionService.xsd" MetadataType="Schema" ID="5690a953-c3f0-4712-88ef-8e32259cdac0" SourceId="1" SourceUrl="http://localhost:4039/ThahavuruFaceRecognitionService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ThahavuruFaceRecognitionService.disco" MetadataType="Disco" ID="ac6e0ab0-e9f8-4a64-b96d-c91a542ac00a" SourceId="1" SourceUrl="http://localhost:4039/ThahavuruFaceRecognitionService.svc?disco" />
+    <MetadataFile FileName="ThahavuruFaceRecognitionService1.xsd" MetadataType="Schema" ID="da4967c2-0112-4b3c-b805-7a5a4daf5463" SourceId="1" SourceUrl="http://localhost:4039/ThahavuruFaceRecognitionService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ThahavuruFaceRecognitionService2.xsd" MetadataType="Schema" ID="b4dac16d-f831-4a97-9870-bd2356be6ab5" SourceId="1" SourceUrl="http://localhost:4039/ThahavuruFaceRecognitionService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ThahavuruFaceRecognitionService3.xsd" MetadataType="Schema" ID="e1cc512f-5e5b-4289-96e5-bde517338180" SourceId="1" SourceUrl="http://localhost:4039/ThahavuruFaceRecognitionService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ThahavuruFaceRecognitionService.wsdl" MetadataType="Wsdl" ID="923ea11a-445a-4e58-bed1-bf62c1378115" SourceId="1" SourceUrl="http://localhost:4039/ThahavuruFaceRecognitionService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

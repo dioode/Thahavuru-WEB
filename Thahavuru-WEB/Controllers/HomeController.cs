@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Thahavuru_WEB.App_Start;
 using Thahavuru_WEB.Models;
+using System.IO;
 
 namespace Test_Web.Controllers
 {
@@ -55,9 +56,61 @@ namespace Test_Web.Controllers
         //[AsyncTimeout(300000)]
         public ActionResult Upload(HttpPostedFileBase FileData, FormCollection forms)
         {
+            
+            
             var file = Request.Files["Filedata"];
             string savePath = Server.MapPath(@"~\Content\" + file.FileName);
-            file.SaveAs(savePath);
+           file.SaveAs(savePath);
+
+            
+                // get the exact file name from the path
+                String strFile = System.IO.Path.GetFileName(savePath);
+
+                // create an instance fo the web service
+                Thahavuru_WEB.ThahavuruServiceReference.ThahavuruFaceRecognitionServiceClient srv = new Thahavuru_WEB.ThahavuruServiceReference.ThahavuruFaceRecognitionServiceClient();
+                    
+
+
+                // get the file information form the selected file
+                FileInfo fInfo = new FileInfo(savePath);
+
+                // get the length of the file to see if it is possible
+                // to upload it (with the standard 4 MB limit)
+                long numBytes = fInfo.Length;
+                double dLen = Convert.ToDouble(fInfo.Length / 1000000);
+
+                // Default limit of 4 MB on web server
+                // have to change the web.config to if
+                // you want to allow larger uploads
+                if (dLen < 4)
+                {
+                    //file.SaveAs(savePath);
+                    // set up a file stream and binary reader for the
+                    // selected file
+                    FileStream fStream = new FileStream(savePath,
+                    FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(fStream);
+
+                    // convert the file to a byte array
+                    byte[] data = br.ReadBytes((int)numBytes);
+                    br.Close();
+
+                    // pass the byte array (file) and file name to the web service
+                    string sTmp = srv.UploadFile(data, strFile);
+                    fStream.Close();
+                    fStream.Dispose();
+
+                    // this will always say OK unless an error occurs,
+                    // if an error occurs, the service returns the error  message
+                    /// MessageBox.Show("File Upload Status: " + sTmp, "File Upload");
+                }
+                else
+                {
+                    // Display message if the file was too large to upload
+                    TempData.Add("The file selected exceeds the size limit for uploads.",0);
+                    ViewBag.message = "The file selected exceeds the size limit for uploads.";
+                }
+           
 
 
             List<ImageModel> ResultImages = new List<ImageModel>();
@@ -100,6 +153,7 @@ namespace Test_Web.Controllers
             SM.Set(SessionDataManager.Key.matchingResults, ResultImages);
 
             return Content(Url.Content(@"~\Content\" + file.FileName));
+                                  
         }
     }
 }

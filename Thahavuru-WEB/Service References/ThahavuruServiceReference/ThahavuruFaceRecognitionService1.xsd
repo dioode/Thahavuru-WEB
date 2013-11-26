@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Thahavuru_Service" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Thahavuru_Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:4039/ThahavuruFaceRecognitionService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="InputImage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Probe" nillable="true" type="q1:ArrayOfbase64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InputImage" nillable="true" type="tns:InputImage" />
+  <xs:complexType name="InputImagesList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Probe" nillable="true" type="tns:ArrayOfInputImage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InputImagesList" nillable="true" type="tns:InputImagesList" />
+  <xs:complexType name="ArrayOfInputImage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InputImage" nillable="true" type="tns:InputImage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInputImage" nillable="true" type="tns:ArrayOfInputImage" />
+</xs:schema>
