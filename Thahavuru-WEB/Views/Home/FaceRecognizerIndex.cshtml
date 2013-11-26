@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "FaceRecognizerIndex";
+}
+
+<link href="@Url.Content("~/Content/CSS/Uploadify/uploadify.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="@Url.Content("~/Content/Script/Uploadify/jquery.uploadify.min.js")" ></script>
+<script src="@Url.Content("~/Content/Script/Uploadify/jquery.uploadify.js")"></script>
+
+<script type="text/javascript">
+        $(function () {
+            $('#file_upload').uploadify({
+                'auto': false,
+                'swf': "@Url.Content("~/Content/CSS/Uploadify/uploadify.swf ")",
+                'uploader': "@Url.Action("Upload")",
+                //'uploadLimit' : 1,
+                'onSelect': function (event, ID, fileObj) {
+                    //alert(event.srcElement.files.length);
+                    for (var i = 0; i < event.originalEvent.srcElement.files.length; i++) {
+                        var file = event.originalEvent.srcElement.files[i];
+
+                        var img = document.getElementById("inputImage");
+                        img.src = null;
+                        img.height = 105;
+                        //img.width = 220;
+
+                        var reader = new FileReader();
+                        reader.onloadend = function () {
+                            img.src = reader.result;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+
+                },
+                'onUploadSuccess': function (file, data, response) {
+                    var img = document.getElementById("inputImage");
+                    img.src = null;
+                    img.src = data;
+
+                    $('#file_upload').uploadify('cancel', '*');
+                    $("#ImgResultPanel").load("/Home/ResultImages");
+
+                }
+            });
+        });
+
+
+        function RecognizeImage()
+        {
+            @*var url = '@Url.Action("uploadFiles", "Home")';
+            var img = document.getElementById("inputImage");
+            if (img != null) {
+                $.get(url, { ImageName: img.src.Name }, function (data) {
+                    //Do whatever u waht with response "Data"
+                    if (data == true) {
+                        $("#ImgResultPanel").load('@Url.Action("ResultImages", "Home")');
+                    }
+                });
+            }*@
+
+            $('#file_upload').uploadify('upload', '*');
+        }
+</script>
+
+<div class="page">
+    <div class="page-region">
+        <div class="page-region-content">
+            <div>
+                <h1 style="margin-top:10px; margin-bottom:10px">Upload Face Image</h1>
+            </div>
+            <table>
+                <tr>
+                    <td style="border:0; width:250px">
+                        <div id="ImageDiv" style="width:200px">
+                            <img id="inputImage" src="@Url.Content("~/Content/Images/noImage.png")" class="rounded polaroid" />
+                        </div>
+                    </td>
+                    <td style="border:0;">
+                        <div id="ajaxUploadForm">
+                            <input type="file" name="file_upload" id="file_upload" />
+                            <button onclick="RecognizeImage();">Recognize</button>
+                            <div id="uploaded">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="progress-bar" data-role="progress-bar" data-value="100" data-color="#ccc" style="margin-top:10px; margin-bottom:10px"></div>
+            <table>
+                <tr>
+                    <td style="border:0;">
+                        <div id="ImgResultPanel">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:0">
+                        <div style="margin-bottom:10px">
+                            <a href="#">
+                               <img src="@Url.Content("~/Content/Images/leftArrow.png")" style="margin-top: 10px; width:40px;" />
+                            </a>
+                            <a href="#">
+                               <img src="@Url.Content("~/Content/Images/rightArrow.png")" style="margin-top: 10px; width:40px;" />
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
