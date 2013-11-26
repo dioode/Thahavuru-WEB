@@ -200,10 +200,11 @@
     <Content Include="Content\UploadifySwf\uploadify.swf" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\dropdown.js" />
+    
     <None Include="Service References\Thahavuru.Services\ThahavuruFaceRecognitionService.disco" />
     <None Include="Service References\Thahavuru.Services\configuration91.svcinfo" />
     <None Include="Service References\Thahavuru.Services\configuration.svcinfo" />
-    <None Include="Service References\Thahavuru.Services\Reference.svcmap">
+    <Content Include="Service References\Thahavuru.Services\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
