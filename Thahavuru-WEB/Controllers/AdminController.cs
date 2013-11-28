@@ -21,7 +21,7 @@ namespace Thahavuru_WEB.Controllers
             return PartialView();
         }
 
-        public ActionResult FaceRecognizerIndex()
+        public ActionResult FaceRecAdminIndex()
         {
             return PartialView();
         }
