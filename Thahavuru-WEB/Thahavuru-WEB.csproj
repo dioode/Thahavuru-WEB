@@ -214,6 +214,9 @@
     <Content Include="Views\Home\Footer.cshtml" />
     <Content Include="Views\Home\ResultImages.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Header.cshtml" />
+    <Content Include="Views\Admin\Footer.cshtml" />
+    <Content Include="Views\Admin\FaceRecAdminIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
