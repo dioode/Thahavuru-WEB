@@ -13,7 +13,9 @@ namespace Thahavuru_WEB.App_Start
         public enum Key
         {
             probImage,
-            matchingResults
+            matchingResults,
+            userInterfaceModel,
+            pageImageDataModel
         }
 
         #region Properties

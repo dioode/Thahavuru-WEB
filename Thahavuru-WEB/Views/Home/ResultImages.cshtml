@@ -1,22 +1,55 @@
 ﻿@{
     ViewBag.Title = "ResultImages";
 }
+@using Thahavuru_WEB.Models
 
-<div class="example">
-    
-    @using Thahavuru_WEB.Models
-   
-        @if (Model != null)
-        {
-            foreach (var item in Model)
-            { 
-                <img src="@Url.Content(item.MatchedImageURI)"/ style="max-width:152px;">
+<script type="text/javascript">
+    @*var model = @Html.Raw(Json.Encode(Model))*@
+
+    function Next()
+    {
+        $.get("/Home/GetNextBackResultSet", { data: "Next" }, function (data) {
+            if (data) {
+                $("#ImgResultPanel").load("/Home/ResultImages");
             }
-        }
-    @*<div><img/></div>
-    <div><img/></div>
-    <div><img/></div>
-    <div><img/></div>
-    <div><img/></div>
-    <div><img/></div>*@
-</div>
+        });
+    }
+
+    function Back() {
+        $.get("/Home/GetNextBackResultSet", { data: "Back" }, function (data) {
+            if (data) {
+                $("#ImgResultPanel").load("/Home/ResultImages");
+            }
+        });
+    }
+</script>
+
+
+   
+    @if (Model != null)
+    {
+        <div class="example">
+            @foreach (var item in Model.ImageList)
+            { 
+                
+                <div class="image-container shadow" style="max-width:140px;">
+                    <img src="@Url.Content(item.MatchedImageURI)"/ style="max-width:140px;">
+                    <div class="overlay-fluid" >
+                        @Url.Content(item.UserName)<br />
+                        @Url.Content(item.Address)
+                    </div>
+                </div>
+            }
+        </div>
+        <div style="margin-bottom:10px">
+            @if(Model.Back){
+                <img id="NextBtn" src="@Url.Content("~/Content/Images/leftArrow.png")" onclick="Back();" style="margin-top: 10px; width:40px;" />
+            }
+            @if(Model.Next){
+                <img id="BackBtn" src="@Url.Content("~/Content/Images/rightArrow.png")" onclick="Next();" style="margin-top: 10px; width:40px;" />
+            }
+         </div>
+    }
+    
+    
+    

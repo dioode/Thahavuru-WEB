@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
@@ -8,16 +7,18 @@ using System.Web;
 namespace Thahavuru_WEB.Models
 {
     [DataContract]
-    public class ImageModel
+    public class PageImageDataModel
     {
         [DataMember]
-        public String MatchedImageURI { get; set; }
+        public int PageNumber { get; set; }
 
         [DataMember]
-        public String UserName { get; set; }
+        public List<ImageModel> ImageList { get; set; }
 
         [DataMember]
-        public String Address { get; set; }
-        
+        public bool Next { get; set; }
+
+        [DataMember]
+        public bool Back { get; set; }
     }
 }
