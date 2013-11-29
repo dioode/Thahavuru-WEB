@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using Thahavuru_WEB.App_Start;
 using Thahavuru_WEB.Models;
 using System.IO;
+using Thahavuru.Techniques.WebServiceMethods;
+using Thahavuru.Resources.ViewModels;
+using Emgu.CV;
+using Emgu.CV.Structure;
 
 namespace Test_Web.Controllers
 {
@@ -73,10 +77,14 @@ namespace Test_Web.Controllers
 
             if (data == "Next") 
             {
+                
                 int nextPage = pageData.PageNumber + 1;
                 if (nextPage <= UIM.MaxLeaves)
                 {
                     //get next page from service
+                    FaceMatchAdapter adapter = new FaceMatchAdapter();
+                    UIM.PageNumber = nextPage;
+                    adapter.FaceMatch(ref UIM);
                     ConvertModel(SM, UIM, pageData, nextPage);
                 }
             }
@@ -121,90 +129,59 @@ namespace Test_Web.Controllers
             SM.Set(SessionDataManager.Key.userInterfaceModel, UIM);
         }
 
-        //[AsyncTimeout(300000)]
+        //[AsyncTimeout(30000)]
+        //public ActionResult Upload(HttpPostedFileBase FileData, FormCollection forms)
+        //{
+                
+        //    var file = Request.Files["Filedata"];
+               
+        //    string savePath = Server.MapPath(@"~\Content\" + file.FileName);
+        //    file.SaveAs(savePath);
+               
+
+        //    UserInterfaceModel  model = new UserInterfaceModel();
+        //    model.PageNumber = 1;
+        //    model.SearchingPerson.FaceofP.FaceImage = new Image<Gray, byte>(savePath);
+        //    FaceMatchAdapter adapter = new FaceMatchAdapter();
+
+        //    adapter.FaceMatch(ref model);
+
+        //    PageImageDataModel pageData = new PageImageDataModel();
+        //    SessionDataManager SM = new SessionDataManager();
+        //    ConvertModel(SM, model, pageData, 1);
+
+        //    return Content(Url.Content(@"~\Content\" + file.FileName));
+                                  
+        //}
+
+
+
         public ActionResult Upload(HttpPostedFileBase FileData, FormCollection forms)
         {
-            
-            
             var file = Request.Files["Filedata"];
             string savePath = Server.MapPath(@"~\Content\" + file.FileName);
-           file.SaveAs(savePath);
+            file.SaveAs(savePath);
+            return Content(Url.Content(@"~\Content\" + file.FileName));
+        }
 
-            
-                //// get the exact file name from the path
-                //String strFile = System.IO.Path.GetFileName(savePath);
-
-                //// create an instance fo the web service
-                //Thahavuru_WEB.ThahavuruServiceReference.ThahavuruFaceRecognitionServiceClient srv = new Thahavuru_WEB.ThahavuruServiceReference.ThahavuruFaceRecognitionServiceClient();
-                    
+        //[AsyncTimeout(30000)]
+        public JsonResult Recognize(string data)
+        {
+            string savePath = Server.MapPath(@data);
 
 
-                //// get the file information form the selected file
-                //FileInfo fInfo = new FileInfo(savePath);
+            UserInterfaceModel model = new UserInterfaceModel();
+            model.PageNumber = 1;
+            model.SearchingPerson.FaceofP.FaceImage = new Image<Gray, byte>(savePath);
+            FaceMatchAdapter adapter = new FaceMatchAdapter();
 
-                //// get the length of the file to see if it is possible
-                //// to upload it (with the standard 4 MB limit)
-                //long numBytes = fInfo.Length;
-                //double dLen = Convert.ToDouble(fInfo.Length / 1000000);
-
-                //// Default limit of 4 MB on web server
-                //// have to change the web.config to if
-                //// you want to allow larger uploads
-                //if (dLen < 4)
-                //{
-                //    //file.SaveAs(savePath);
-                //    // set up a file stream and binary reader for the
-                //    // selected file
-                //    FileStream fStream = new FileStream(savePath,
-                //    FileMode.Open, FileAccess.Read);
-                //    BinaryReader br = new BinaryReader(fStream);
-
-                //    // convert the file to a byte array
-                //    byte[] data = br.ReadBytes((int)numBytes);
-                //    br.Close();
-
-                //    // pass the byte array (file) and file name to the web service
-                //    string sTmp = srv.UploadFile(data, strFile);
-                //    fStream.Close();
-                //    fStream.Dispose();
-
-                //    // this will always say OK unless an error occurs,
-                //    // if an error occurs, the service returns the error  message
-                //    /// MessageBox.Show("File Upload Status: " + sTmp, "File Upload");
-                //}
-                //else
-                //{
-                //    // Display message if the file was too large to upload
-                //    TempData.Add("The file selected exceeds the size limit for uploads.",0);
-                //    ViewBag.message = "The file selected exceeds the size limit for uploads.";
-                //}
-           
-
-            UserInterfaceModel UIM = new UserInterfaceModel();
-            UIM.PageNumber = 1;
-            UIM.Next = true;
-            UIM.Back = false;
-            UIM.MaxLeaves = 10;
-
-            UIM.SearchingPerson = new PersonVM();
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(1, new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(2, new List<int>() { 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 });
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(3, new List<int>() { 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 });
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(4, new List<int>() { 31, 32, 33, 34, 35, 36, 37, 38, 39, 40 });
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(5, new List<int>() { 41, 42, 43, 44, 45, 46, 47, 48, 49, 50 });
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(6, new List<int>() { 51, 52, 53, 54, 55, 56, 57, 58, 59, 60 });
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(7, new List<int>() { 61, 62, 63, 64, 65, 66, 67, 68, 69, 70 });
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(8, new List<int>() { 71, 72, 73, 74, 75, 76, 77, 78, 79, 80 });
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(9, new List<int>() { 81, 82, 83, 84, 85, 86, 87, 88, 89, 90 });
-            UIM.SearchingPerson.MatchedFaceIdSet.Add(10, new List<int>() { 91, 92, 93, 94, 95, 96, 97, 98, 99, 100 });
-
+            adapter.FaceMatch(ref model);
 
             PageImageDataModel pageData = new PageImageDataModel();
             SessionDataManager SM = new SessionDataManager();
-            ConvertModel(SM, UIM, pageData, 1);
+            ConvertModel(SM, model, pageData, 1);
 
-            return Content(Url.Content(@"~\Content\" + file.FileName));
-                                  
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
     }
 }

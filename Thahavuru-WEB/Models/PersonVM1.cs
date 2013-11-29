@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace Thahavuru_WEB.Models
 {
     [DataContract]
-    public class PersonVM
+    public class PersonVM1
     {
-        public PersonVM()
+        public PersonVM1()
         {
             FaceofP = new Face();
             SearchTrakKeeper = new List<List<List<int>>>();

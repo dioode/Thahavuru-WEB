@@ -9,45 +9,32 @@
 
 
 <script type="text/javascript">
-        $(function () {
-            $('#file_upload').uploadify({
-                'auto': false,
-                'swf': "@Url.Content("~/Content/CSS/Uploadify/uploadify.swf ")",
+    $(function () {
+        $('#file_upload').uploadify({
+            'auto': false,
+            'swf': "@Url.Content("~/Content/CSS/Uploadify/uploadify.swf ")",
                 'uploader': "@Url.Action("Upload")",
                 'width': 220,
-                'height':20,
-
-                //'uploadLimit' : 1,
+                'height': 20,
                 'onSelect': function (event, ID, fileObj) {
-                    //alert(event.srcElement.files.length);
                     var img = document.getElementById("inputImage");
                     img.src = "@Url.Content("~/Content/Images/noImage.png")";
+                    var imgName = document.getElementById("imgName");
+                    imgName.value = "noImage";
 
-                    $.get("/Home/ClearResults",{data:null}, function () {
+                    $.get("/Home/ClearResults", { data: null }, function () {
                         $("#ImgResultPanel").load("/Home/ResultImages");
                     });
 
-                    //alert(File.Name);
-                    //for (var i = 0; i < event.originalEvent.srcElement.files.length; i++) {
-                    //    var file = event.originalEvent.srcElement.files[i];
-
-                    //    var img = document.getElementById("inputImage");
-                    //    img.src = null;
-                    //    img.height = 105;
-                    //    //img.width = 220;
-
-                    //    var reader = new FileReader();
-                    //    reader.onloadend = function () {
-                    //        img.src = reader.result;
-                    //    }
-                    //    reader.readAsDataURL(file);
-                    //}
-
+                    $('#file_upload').uploadify('upload', '*');
                 },
                 'onUploadSuccess': function (file, data, response) {
                     var img = document.getElementById("inputImage");
                     img.src = null;
                     img.src = data;
+
+                    var imgName = document.getElementById("imgName");
+                    imgName.value = data.toString();
 
                     $('#file_upload').uploadify('cancel', '*');
                     $("#ImgResultPanel").load("/Home/ResultImages");
@@ -56,21 +43,13 @@
             });
         });
 
-
-        function RecognizeImage()
-        {
-            @*var url = '@Url.Action("uploadFiles", "Home")';
-            var img = document.getElementById("inputImage");
-            if (img != null) {
-                $.get(url, { ImageName: img.src.Name }, function (data) {
-                    //Do whatever u waht with response "Data"
-                    if (data == true) {
-                        $("#ImgResultPanel").load('@Url.Action("ResultImages", "Home")');
-                    }
+        function RecognizeImage() {
+            var imgName = document.getElementById("imgName");
+            if (imgName.value != "noImage") {
+                $.get("/Home/Recognize", { data: imgName.value }, function () {
+                    $("#ImgResultPanel").load("/Home/ResultImages");
                 });
-            }*@
-
-            $('#file_upload').uploadify('upload', '*');
+            }
         }
 </script>
 
@@ -101,6 +80,7 @@
                 <div class="row">
                     <div id="ImageDiv" class="span3 offset1" >
                         <img id="inputImage" src="@Url.Content("~/Content/Images/noImage.png")" class="rounded polaroid" />
+                        <input id="imgName" type="text" value="noImage" style="visibility:hidden" />
                     </div>
                     <div id="ajaxUploadForm" class="span3" style="padding-top:40px">
                         <input type="file" name="file_upload" id="file_upload" style=" width: inherit; "/>

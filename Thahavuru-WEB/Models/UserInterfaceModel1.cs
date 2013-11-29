@@ -8,20 +8,19 @@ using System.Threading.Tasks;
 namespace Thahavuru_WEB.Models
 {
     [DataContract]
-    public class UserInterfaceModel
+    public class UserInterfaceModel1
     {
-        public UserInterfaceModel()
+        public UserInterfaceModel1()
         {
-            SearchingPerson = new PersonVM();
+            SearchingPerson = new PersonVM1();
         }
 
         [DataMember]
-        public PersonVM SearchingPerson;
+        public PersonVM1 SearchingPerson;
 
         [DataMember]
         public int PageNumber{ get; set; }
 
-        private int maxLeaves;
         [DataMember]
         public int MaxLeaves
         {
