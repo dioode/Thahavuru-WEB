@@ -30,6 +30,9 @@ namespace Thahavuru_WEB.Controllers
         {
             return PartialView();
         }
-
+        public ActionResult AddNewAttribute()
+        {
+            return PartialView();
+        }
     }
 }

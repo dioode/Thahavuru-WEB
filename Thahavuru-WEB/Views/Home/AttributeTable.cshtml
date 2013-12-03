@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "AttributeTable";
+}
+@using Thahavuru_WEB.Models
+
+@if (Model != null)
+{
+    if (Model.AdvancedSearchResult != null){
+        
+        @*<img id="inputImage" src="Model.AdvancedSearchResult" class="rounded polaroid span3" />*@
+        <div class="span3" style="width:220px">
+            <div class="image-container" style ="width:inherit">
+                <img src="@Url.Content(Model.AdvancedSearchResult.MatchedImageURI)" style="width:inherit" class="polaroid"/>
+                <div class="rounded overlay-fluid" style="width:inherit; padding:5px">
+                    @Url.Content(Model.AdvancedSearchResult.UserName)<br />
+                    @Url.Content(Model.AdvancedSearchResult.Address)
+                </div>
+            </div>
+        </div>    
+        <div class="span3">
+            <table class="table striped">
+                <thead>
+                    <tr>
+                        <th class="text-left">Attribute</th>
+                        <th class="text-left">Value</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var att in Model.attributeValues)
+                    {
+                            <tr><td>@att.Key</td><td class="right">@att.Value</td></tr>
+                    }
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="span3 offset1">
+            <table class="table striped">
+                <thead>
+                    <tr>
+                        <th class="text-left">Attribute</th>
+                        <th class="text-left">Value</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var att in Model.attributeValues)
+                    {
+                            <tr><td>@att.Key</td><td class="right">@att.Value</td></tr>
+                    }
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+    }          
+    
+        
+            
+}
+

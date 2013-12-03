@@ -41,22 +41,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\..\..\EmguCV\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.dll</HintPath>
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.DebuggerVisualizers.VS2012">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\..\..\EmguCV\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.DebuggerVisualizers.VS2012.dll</HintPath>
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.DebuggerVisualizers.VS2012.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.GPU">
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.GPU.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.ML">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\..\..\EmguCV\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.ML.dll</HintPath>
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.ML.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.OCR">
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.OCR.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.Stitching">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\..\..\EmguCV\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.Stitching.dll</HintPath>
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.Stitching.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\..\..\EmguCV\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.UI.dll</HintPath>
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.VideoStab">
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.CV.VideoStab.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\..\..\EmguCV\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.Util.dll</HintPath>
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -127,29 +136,30 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Thahavuru.Resources, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+    <Reference Include="Thahavuru.DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Thahavuru.Libraries\Thahavuru.Resources\bin\Debug\Thahavuru.Resources.dll</HintPath>
+      <HintPath>..\..\Thavuru-Library\Thahavuru.DataAccessLayer\bin\Debug\Thahavuru.DataAccessLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="Thahavuru.Resources">
+      <HintPath>..\..\Thavuru-Library\Thahavuru.Resources\bin\Debug\Thahavuru.Resources.dll</HintPath>
     </Reference>
     <Reference Include="Thahavuru.Techniques">
-      <HintPath>..\..\Thahavuru.Libraries\Thahavuru.Techniques\bin\Debug\Thahavuru.Techniques.dll</HintPath>
+      <HintPath>..\..\Thavuru-Library\Thahavuru.Techniques\bin\Debug\Thahavuru.Techniques.dll</HintPath>
     </Reference>
     <Reference Include="ZedGraph">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\..\..\EmguCV\emgucv-windows-universal-gpu 2.4.9.1847\bin\ZedGraph.dll</HintPath>
+      <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\ZedGraph.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\SessionDataManager.cs" />
+    <Compile Include="Controllers\Admin2Controller.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Face.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\PageImageDataModel.cs" />
-    <Compile Include="Models\PersonVM1.cs" />
-    <Compile Include="Models\UserInterfaceModel1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -171,13 +181,15 @@
     <Content Include="Content\Images\googleP.png" />
     <Content Include="Content\Images\Help.png" />
     <Content Include="Content\Images\leftArrow.png" />
-    <Content Include="Content\Images\Logo1.png" />
+    <Content Include="Content\Images\loading.gif" />
+    <Content Include="Content\Images\Logo.png" />
     <Content Include="Content\Images\noImage.png" />
     <Content Include="Content\Images\rightArrow.png" />
     <Content Include="Content\Images\twitter.png" />
     <Content Include="app.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\CSS\loader.less" />
     <None Include="Content\Script\jquery-1.7.1.intellisense.js" />
     <Content Include="Content\Script\Docs\docs.js" />
     <Content Include="Content\Script\jquery-1.7.1.js" />
@@ -252,6 +264,8 @@
     <Content Include="Views\Admin\Header.cshtml" />
     <Content Include="Views\Admin\Footer.cshtml" />
     <Content Include="Views\Admin\FaceRecAdminIndex.cshtml" />
+    <Content Include="Views\Home\AttributeTable.cshtml" />
+    <Content Include="Views\Admin\AddNewAttribute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -293,7 +307,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10244</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5607/</IISUrl>
+          <IISUrl>http://localhost:10244/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://localhost</CustomServerUrl>
