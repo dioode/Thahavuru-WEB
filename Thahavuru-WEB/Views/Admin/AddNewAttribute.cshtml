@@ -1,1 +1,63 @@
-﻿
+﻿@{
+    ViewBag.Title = "AddNewAttribute";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <link href="@Url.Content("~/Content/CSS/Metro/metro-bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CSS/Metro/metro-bootstrap-responsive.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CSS/Metro/docs.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CSS/Prettify/prettify.css")" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script src="@Url.Content("~/Content/Script/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Script/JQuery/jquery.widget.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Script/JQuery/jquery.mousewheel.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Script/Prettify/prettify.js")" type="text/javascript"></script>
+    
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="@Url.Content("~/Content/Script/Metro/metro-loader.js")" type="text/javascript"></script>
+   
+    <!-- Local JavaScript -->
+    <script src="@Url.Content("~/Content/Script/Docs/docs.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Script/Metro/metro-accordion.js")"></script>
+    @*<script src="js/github.info.js"></script>*@
+
+    <title>THAHAVURU</title>
+
+    
+
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="@Url.Content("Header")"></header>
+    <div>
+        <div class="page">
+            <div class="page-region">
+                <div class="page-region-content">
+
+                    <div class="grid">
+                        
+                        <div class="row">
+                            <div class="span12" data-load="@Url.Content("AddNewAttributeDetailed")">
+                                
+                            </div>
+                            @*<div class="span5" data-load="@Url.Content("AddNewAttributeRightSpan")"></div>*@
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Footer" data-load="@Url.Content("Footer")"></div>
+    <script src="js/hitua.js"></script>
+
+</body>
+</html>
