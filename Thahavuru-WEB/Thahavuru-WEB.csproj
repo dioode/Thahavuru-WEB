@@ -141,6 +141,7 @@
     <Content Include="Content\Images\GitHub.png" />
     <Content Include="Content\Images\googleP.png" />
     <Content Include="Content\Images\Help.png" />
+    <Content Include="Content\Images\Home.png" />
     <Content Include="Content\Images\leftArrow.png" />
     <Content Include="Content\Images\Logo1.png" />
     <Content Include="Content\Images\noImage.png" />
