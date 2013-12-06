@@ -1,0 +1,304 @@
+﻿@{
+    ViewBag.Title = "AddNewAttributeDetailed";
+}
+@using Thahavuru_WEB.Models
+
+<script src="@Url.Content("~/Content/Script/Metro/metro-accordion.js")"></script>
+
+<script type="text/javascript">
+    function editAttribute(attributeId, nClasses)
+    {
+        //alert(nClasses.toString());
+        $("#attNameLabel" + attributeId).hide();
+        $("#attName" + attributeId).show();
+        $("#cTechniqueLabel" + attributeId).hide();
+        $("#cTechnique" + attributeId).show();
+        $("#editButton" + attributeId).hide();
+        $("#cancelButton" + attributeId).show();
+        $("#deleteButton" + attributeId).show();
+        $("#saveButton" + attributeId).show();
+        $("#upButton" + attributeId).hide();
+        $("#downButton" + attributeId).hide();
+        $("#biometricRB" + attributeId).removeAttr('disabled');
+        $("#nbiometricRB" + attributeId).removeAttr('disabled');
+
+        for (var i = 0; i < nClasses; i++) {
+            $('label[name=listItemLable' + attributeId + (i+1)+']').hide();
+            $('input[name=listItemName' + attributeId + (i+1)+ ']').show();
+        }
+
+        
+    }
+    function up(attributeId) {
+        alert(attributeId.toString());
+        var NameInput = document.getElementById("attName" + attributeId).value;
+        alert(NameInput);
+    }
+    function down(attributeId) {
+        alert(attributeId.toString());
+        var NameInput = document.getElementById("attName" + attributeId).value;
+        alert(NameInput);
+    }
+
+    function deleteAttr(attributeId) {
+        $.post("/Admin/DeleteAttribute", { attId: attributeId }, function (data) {
+            if (data) {
+                //$("#ImgResultPanel").load("AddNewAttributeDetailed");
+            }
+        });
+    }
+    function cancel(attributeId, nClasses) {
+        $("#attNameLabel" + attributeId).show();
+        $("#attName" + attributeId).hide();
+        $("#cTechniqueLabel" + attributeId).show();
+        $("#cTechnique" + attributeId).hide();
+        $("#editButton" + attributeId).show();
+        $("#cancelButton" + attributeId).hide();
+        $("#deleteButton" + attributeId).hide();
+        $("#saveButton" + attributeId).hide();
+        $("#upButton" + attributeId).show();
+        $("#downButton" + attributeId).show();
+        $("#biometricRB" + attributeId).attr('disabled','disabled');
+        $("#nbiometricRB" + attributeId).attr('disabled', 'disabled');//listItemLable listItem
+
+        for (var i = 0; i < nClasses; i++) {
+            $('label[name=listItemLable' + attributeId + (i + 1) + ']').show();
+            $('input[name=listItemName' + attributeId + (i + 1) + ']').hide();
+        }
+    }
+    function save(attributeId) {
+        
+        var attName = $("#attName" + attributeId).val();
+        var technique = $("#cTechnique" + attributeId).val();
+        var isBiometric = $('[name=r' + attributeId + ']').is(':checked');
+        var listItems = document.getElementsByName("listItem" + attributeId);
+        var indClasses = new Array();
+        for (var i = 0; i < listItems.length; i++)
+        {
+            indClasses[i] = listItems[i].value;
+        }
+        //alert(classes[0]);
+        $.get("/Admin/UpdateAttribute", { attId: attributeId, attName: attName, cTechnique: technique, isBiometric: isBiometric, indClasses: indClasses }, function (data) {
+            if (data) {
+                //$("#ImgResultPanel").load("AddNewAttributeDetailed");
+            }
+        });
+
+    }
+
+    function addNewAttribute()
+    {
+        $("#addNewAttributeDiv").show();
+        //addNewAttributeDiv
+    }
+
+    function cancelNew()
+    {
+        $("#addNewAttributeDiv").hide();
+        $("#newAttName").val("");
+        $("#newAttCTechnique").val("");
+        $("#newAttNOC").val("");
+    }
+
+
+</script>
+<div class ="grid">                    
+    <div class="row">
+        <div class="span12">
+            <div class="span9"><h1>Add or Edit Attributes</h1></div>
+            <div class="span3"><button  type="button" onclick="addNewAttribute()" style="height:65px; margin-top:10px">Add New Attribute</button></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="accordion with-marker" data-role="accordion" data-closeany="false">
+
+            
+            <div id="addNewAttributeDiv" class="accordion-frame" style="display:none">
+                <a href="#" class="heading bg-gray fg-white collapsed">New Attribute</a>
+                <div class="content">
+                    <div class="input-control text" data-role="input-control">
+                        @using (Html.BeginForm("AddNewAttribute", "Admin", FormMethod.Post))
+                        {
+                            <fieldset>
+                                <input type="text" id="newId" name="newAttId" value="" style="display:none"/>
+                                <legend >@*<label id="newAttNameLable">@item.Name</label>*@
+                                    <input id="newAttName" name="newAttName" type="text" value="" placeholder="type text">
+                                </legend>
+                                <div class="input-control text" data-role="input-control">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <label style="width:200px">Classification Technique : </label>
+                                            </td>
+                                            <td>
+                                                <input id="newAttCTechnique" name="newAttCTechnique" type="text"  value="" placeholder="type text">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="input-control text" data-role="input-control">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <label style="width:200px">Number of Classes : </label>
+                                            </td>
+                                            <td>
+                                                <input id="newAttNOC" name="newAttNOC" type="text"  value="" placeholder="type text">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div>
+                                    <div class="input-control radio default-style" data-role="input-control">
+                                        <label>
+                                            <input id="newBiometric" type="radio" name="rNew" >
+                                            <span class="check"></span>
+                                            Biometric
+                                        </label>
+                                    </div>
+                                    <div class="input-control radio  default-style" data-role="input-control">
+                                        <label>
+                                            <input id="newNonBiometric" type="radio" name="rNew" >
+                                            <span class="check"></span>
+                                            Non-Biometric
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="input-control text" data-role="input-control">
+                                    <div class="accordion with-marker" data-role="accordion" data-closeany="false">
+                                        <div class="accordion-frame">
+                                            <a href="#" class="heading collapsed">View Classes</a>
+                                            <div class="content">
+                                                <ul>
+                                                    @*<li><label name="listItemLable@(item.AttributeId)@(iClass.ClassNumber)">@iClass.Name</label>
+                                                        <input name="listItemName@(item.AttributeId)@(iClass.ClassNumber)" style="display:none;" type="text"  value="@iClass.Name" placeholder="type text" />
+                                                        <input name="listClassNumber@(item.AttributeId)@(iClass.ClassNumber)" style="display:none;" type="text"  value="@iClass.ClassNumber" placeholder="type text" />
+                                                        <input name="listId@(item.AttributeId)@(iClass.ClassNumber)" style="display:none;" type="text"  value="@iClass.Id" placeholder="type text" />
+                                                    </li>*@
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                            
+                                </div>
+                                                        
+                                <div class="input-control text" data-role="input-control" style="margin-top:15px">
+                                    <button class="span2" type="button" id="newCancelButton" onclick="cancelNew()">Cancel</button>
+                                    <button class="span2" type="submit" id="newSave">Save</button>
+                                                                    
+                                    @*<button class="span1 offset2" type="submit" id="upButton@(item.AttributeId)" onclick="up(@item.AttributeId);">Up</button>
+                                    <button class="span1" type="submit" id="downButton@(item.AttributeId)" onclick="down(@item.AttributeId);">Down</button>
+                                *@</div>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+            @if(Model != null){
+                foreach (var item in Model.AttributeList)
+                {
+                    <div class="accordion-frame">
+                        <a href="#" class="heading bg-gray fg-white collapsed">@item.Name</a>
+                        <div class="content">
+                            <div class="input-control text" data-role="input-control">
+                                @*<form action="/Admin/UpdateAttribute" method="post">*@
+                                @using (Html.BeginForm("EditAttribute", "Admin", FormMethod.Post))
+                                {
+                                    <fieldset>
+                                        <input type="text" id="attId@(item.AttributeId)" name="attId" value="@item.AttributeId" style="display:none"/>
+                                        <input type="text" id="attNClasses@(item.AttributeId)" name="nClasses" value="@item.NumberOfClasses" style="display:none"/>
+                                        <legend ><label id="attNameLabel@(item.AttributeId)">@item.Name</label><input id="attName@(item.AttributeId)" name="attName" style="display:none;" type="text" value="@item.Name" placeholder="type text"></legend>
+                                        <div class="input-control text" data-role="input-control">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <label style="width:200px">Classification Technique : </label>
+                                                    </td>
+                                                    <td>
+                                                        <label  id="cTechniqueLabel@(item.AttributeId)">@item.ClassificationTechnique</label>
+                                                        <input id="cTechnique@(item.AttributeId)" name="attCTechnique" style="display:none;" type="text"  value="@item.ClassificationTechnique" placeholder="type text">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div>
+                                            <div class="input-control radio default-style" data-role="input-control">
+                                                <label>
+                                                    @if (item.IsBiometric)
+                                                    {
+                                                        <input id="biometricRB@(item.AttributeId)" type="radio" name="r@(item.AttributeId)" checked="checked" disabled="disabled">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input id="biometricRB@(item.AttributeId)" type="radio" name="r@(item.AttributeId)" disabled="disabled">
+                                                    }
+                                                    <span class="check"></span>
+                                                    Biometric
+                                                </label>
+                                            </div>
+                                            <div class="input-control radio  default-style" data-role="input-control">
+                                                <label>
+                                                    @if (item.IsBiometric)
+                                                    {
+                                                        <input id="nbiometricRB@(item.AttributeId)" type="radio" name="r@(item.AttributeId)" disabled="disabled">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input id="nbiometricRB@(item.AttributeId)" type="radio" name="r@(item.AttributeId)" checked="checked" disabled="disabled">
+                                                    }
+                                                    <span class="check"></span>
+                                                    Non-Biometric
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-control text" data-role="input-control">
+                                            <div class="accordion with-marker" data-role="accordion" data-closeany="false">
+                                                <div class="accordion-frame">
+                                                    <a href="#" class="heading collapsed">View Classes</a>
+                                                    <div class="content">
+                                                        <ul>
+                                                            @foreach (var iClass in item.IndClasses)
+                                                            {
+                                                                <li><label name="listItemLable@(item.AttributeId)@(iClass.ClassNumber)">@iClass.Name</label>
+                                                                    <input name="listItemName@(item.AttributeId)@(iClass.ClassNumber)" style="display:none;" type="text"  value="@iClass.Name" placeholder="type text" />
+                                                                    <input name="listClassNumber@(item.AttributeId)@(iClass.ClassNumber)" style="display:none;" type="text"  value="@iClass.ClassNumber" placeholder="type text" />
+                                                                    <input name="listId@(item.AttributeId)@(iClass.ClassNumber)" style="display:none;" type="text"  value="@iClass.Id" placeholder="type text" />
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                            
+                                        </div>
+                                                        
+                                        <div class="input-control text" data-role="input-control" style="margin-top:15px">
+                                            <button class="span2" type="button" id="editButton@(item.AttributeId)" onclick="editAttribute(@item.AttributeId, @item.NumberOfClasses);">Edit</button>
+                                            <button class="span2" type="button" style="display:none" id="cancelButton@(item.AttributeId)" onclick="cancel(@item.AttributeId, @item.NumberOfClasses)">Cancel</button>
+                                            <button class="span2" type="button" style="display:none" id="deleteButton@(item.AttributeId)" onclick="deleteAttr(@item.AttributeId)">Delete</button>
+                                            <button class="span2" type="submit" style="display:none" id="saveButton@(item.AttributeId)" @*onclick="save(@item.AttributeId)"*@>Save</button>
+                                                                    
+                                            <button class="span1 offset2" type="submit" id="upButton@(item.AttributeId)" onclick="up(@item.AttributeId);">Up</button>
+                                            <button class="span1" type="submit" id="downButton@(item.AttributeId)" onclick="down(@item.AttributeId);">Down</button>
+                                        </div>
+                                    </fieldset>
+                                @*</form>*@
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    }
+                }
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>

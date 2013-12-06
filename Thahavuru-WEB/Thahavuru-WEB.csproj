@@ -270,6 +270,7 @@
     <Content Include="Views\Admin\FaceRecAdminIndex.cshtml" />
     <Content Include="Views\Home\AttributeTable.cshtml" />
     <Content Include="Views\Admin\AddNewAttribute.cshtml" />
+    <Content Include="Views\Admin\AddNewAttributeDetailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
