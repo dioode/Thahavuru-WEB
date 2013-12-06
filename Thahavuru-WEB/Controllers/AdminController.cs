@@ -12,17 +12,65 @@ namespace Thahavuru_WEB.Controllers
 {
     public class AdminController : Controller
     {
+
+        #region Action Methods
+
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Header()
+        public ActionResult AddNewAttribute()
         {
-            return PartialView();
+            return View();
         }
 
-        public ActionResult FaceRecAdminIndex()
+        public ActionResult ChangeHierarchy()
+        {
+            //DataAccessSingleton das = new DataAccessSingleton();
+            //List<FaceAttribute> allAttributes = das.GetAllAttributes();
+            //FaceAttributeHiearachy fah = das.GetFaceAttributeHierarchy();
+
+            //ChangeHierarchyModel chm = new ChangeHierarchyModel();
+
+            //foreach (var item in fah.OrderedFaceAttributeSet)
+            //{
+            //    allAttributes.RemoveAll(x => x.AttributeId == item.AttributeId);
+            //}
+
+            //foreach (var item in allAttributes)
+            //{
+            //    chm.AttributesNotInHierarchy.Add(new AttributeModel() { Name = item.Name, AttributeId = item.AttributeId });
+            //}
+            //for (int i = 0; i < fah.OrderedFaceAttributeSet.Count; i++)
+            //{
+            //    AttributeModel m = new AttributeModel();
+            //    m.AttributeId = fah.OrderedFaceAttributeSet[i].AttributeId;
+            //    m.Name = fah.OrderedFaceAttributeSet[i].Name;
+            //    if (i == 0)
+            //    {
+            //        m.IsUpDisabled = true;
+            //    }
+            //    else m.IsUpDisabled = false;
+
+            //    if (i == fah.OrderedFaceAttributeSet.Count - 1)
+            //    {
+            //        m.IsDownDisabled = true;
+            //    }
+            //    else m.IsDownDisabled = false;
+
+            //    chm.AttributesInHierarchy.Add(m);
+            //}
+            //return View(chm);
+
+            return View();
+        }
+
+        #endregion
+
+        #region PartialView Actions
+
+        public ActionResult Header()
         {
             return PartialView();
         }
@@ -32,11 +80,9 @@ namespace Thahavuru_WEB.Controllers
             return PartialView();
         }
 
-        public ActionResult AddNewAttribute()
+        public ActionResult FaceRecAdminIndex()
         {
-
-
-            return View();
+            return PartialView();
         }
 
         public ActionResult AddNewAttributeDetailed()
@@ -69,12 +115,61 @@ namespace Thahavuru_WEB.Controllers
             return PartialView(aLM);
         }
 
+        public ActionResult ChangeHierarchyDetailed() 
+        {
+            DataAccessSingleton das = new DataAccessSingleton();
+            List<FaceAttribute> allAttributes = das.GetAllAttributes();
+            FaceAttributeHiearachy fah = das.GetFaceAttributeHierarchy();
+            
+            ChangeHierarchyModel chm = new ChangeHierarchyModel();
+
+            foreach (var item in fah.OrderedFaceAttributeSet)
+            {
+                allAttributes.RemoveAll(x => x.AttributeId == item.AttributeId);
+            }
+
+            foreach (var item in allAttributes)
+            {
+                chm.AttributesNotInHierarchy.Add(new AttributeModel() { Name = item.Name, AttributeId = item.AttributeId});
+            }
+            for (int i = 0; i < fah.OrderedFaceAttributeSet.Count; i++ )
+            {
+                AttributeModel m = new AttributeModel();
+                m.AttributeId = fah.OrderedFaceAttributeSet[i].AttributeId;
+                m.Name = fah.OrderedFaceAttributeSet[i].Name;
+                if (i == 0)
+                {
+                    m.IsUpDisabled = true;
+                }else m.IsUpDisabled = false;
+
+                if (i == fah.OrderedFaceAttributeSet.Count -1 )
+                {
+                    m.IsDownDisabled = true;
+                }
+                else m.IsDownDisabled = false;
+
+                chm.AttributesInHierarchy.Add(m);
+            }
+
+            return PartialView(chm);
+        }
+
+
+
+        #endregion
+
+        #region Json Requests
+
         public JsonResult UpdateAttribute(int attId, string attName, string cTechnique, bool isBiometric, object[] indClasses)
         {
             //SessionDataManager SM = new SessionDataManager();
             //SM.Clear(SessionDataManager.Key.pageImageDataModel);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
+
+        #region Http Post Action Methods
 
         [HttpPost]
         public ActionResult EditAttribute(FormCollection collection)
@@ -87,7 +182,7 @@ namespace Thahavuru_WEB.Controllers
 
             fa.IsBiometric = collection["r" + fa.AttributeId] == "on" ? true : false;
             //object radio2 = collection["r" + fa.AttributeId];
-            object o = collection["r" + fa.AttributeId];
+            //object o = collection["r" + fa.AttributeId];
             for (int i = 0; i < fa.NumberOfClasses; i++)
             {
                 IndividualClass iC = new IndividualClass();
@@ -115,5 +210,47 @@ namespace Thahavuru_WEB.Controllers
 
             return RedirectToAction("AddNewAttribute");
         }
+
+        //[HttpPost]
+        public JsonResult AddAttributeDT(int attId)
+        {
+            DataAccessSingleton das = new DataAccessSingleton();
+            bool success = das.AddNewAttributeToHierarchy(attId);
+            
+            //return RedirectToAction("ChangeHierarchy");
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        //[HttpPost]
+        public JsonResult RemoveAttributeFromDT(int attId)
+        {
+            DataAccessSingleton das = new DataAccessSingleton();
+            bool success = das.RemoveAttributeFromHierarchy(attId);
+
+            //return RedirectToAction("ChangeHierarchy");
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        //[HttpPost]
+        public JsonResult MoveUpAttributeDT(int attId)
+        {
+            DataAccessSingleton das = new DataAccessSingleton();
+            bool success = das.MoveUpHierarchy(attId);
+
+            //return RedirectToAction("ChangeHierarchy");
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        //[HttpPost]
+        public JsonResult MoveDownAttributeDT(int attId)
+        {
+            DataAccessSingleton das = new DataAccessSingleton();
+            bool success = das.MoveDownHierarchy(attId);
+            //return RedirectToAction("ChangeHierarchy");
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
     }
 }
