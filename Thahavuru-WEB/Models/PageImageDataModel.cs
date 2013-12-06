@@ -16,6 +16,14 @@ namespace Thahavuru_WEB.Models
         public List<ImageModel> ImageList { get; set; }
 
         [DataMember]
+        public List<KeyValuePair<string, string>> attributeValues { get; set; }
+
+        [DataMember]
+        public ImageModel AdvancedSearchResult { get; set; }
+
+        public string AdvancedSearchUserName { get; set; }
+
+        [DataMember]
         public bool Next { get; set; }
 
         [DataMember]

@@ -9,69 +9,54 @@
 
 
 <script type="text/javascript">
-        $(function () {
-            $('#file_upload').uploadify({
-                'auto': false,
-                'swf': "@Url.Content("~/Content/CSS/Uploadify/uploadify.swf ")",
+    $(function () {
+        $('#file_upload').uploadify({
+            'auto': false,
+            'swf': "@Url.Content("~/Content/CSS/Uploadify/uploadify.swf ")",
                 'uploader': "@Url.Action("Upload")",
                 'width': 220,
-                'height':20,
-
-                //'uploadLimit' : 1,
+                'height': 20,
                 'onSelect': function (event, ID, fileObj) {
-                    //alert(event.srcElement.files.length);
                     var img = document.getElementById("inputImage");
                     img.src = "@Url.Content("~/Content/Images/noImage.png")";
+                    var imgName = document.getElementById("imgName");
+                    imgName.value = "noImage";
 
-                    $.get("/Home/ClearResults",{data:null}, function () {
+                    $.get("/Home/ClearResults", { data: null }, function () {
                         $("#ImgResultPanel").load("/Home/ResultImages");
+                        $("#AttributeTable").load("/Home/AttributeTable");
                     });
 
-                    //alert(File.Name);
-                    //for (var i = 0; i < event.originalEvent.srcElement.files.length; i++) {
-                    //    var file = event.originalEvent.srcElement.files[i];
-
-                    //    var img = document.getElementById("inputImage");
-                    //    img.src = null;
-                    //    img.height = 105;
-                    //    //img.width = 220;
-
-                    //    var reader = new FileReader();
-                    //    reader.onloadend = function () {
-                    //        img.src = reader.result;
-                    //    }
-                    //    reader.readAsDataURL(file);
-                    //}
-
+                    $('#file_upload').uploadify('upload', '*');
                 },
                 'onUploadSuccess': function (file, data, response) {
                     var img = document.getElementById("inputImage");
                     img.src = null;
                     img.src = data;
 
-                    $('#file_upload').uploadify('cancel', '*');
-                    $("#ImgResultPanel").load("/Home/ResultImages");
+                    var imgName = document.getElementById("imgName");
+                    imgName.value = data.toString();
 
+                    $('#file_upload').uploadify('cancel', '*');
+                    //$("#ImgResultPanel").load("/Home/ResultImages");
+                    //$("#AttributeTable").load("/Home/AttributeTable");
                 }
             });
         });
 
-
-        function RecognizeImage()
-        {
-            @*var url = '@Url.Action("uploadFiles", "Home")';
-            var img = document.getElementById("inputImage");
-            if (img != null) {
-                $.get(url, { ImageName: img.src.Name }, function (data) {
-                    //Do whatever u waht with response "Data"
-                    if (data == true) {
-                        $("#ImgResultPanel").load('@Url.Action("ResultImages", "Home")');
-                    }
-                });
-            }*@
-
-            $('#file_upload').uploadify('upload', '*');
+    function RecognizeImage() {
+        $("#WaitAnimation").show();
+        var imgName = document.getElementById("imgName");
+        var userName = document.getElementById("userNameTag");
+        if (imgName.value != "noImage") {
+            $.get("/Home/Recognize", { imageName: imgName.value, userName:userName.value}, function () {
+                $("#ImgResultPanel").load("/Home/ResultImages");
+                $("#AttributeTable").load("/Home/AttributeTable");
+                $("#WaitAnimation").hide();
+            });
         }
+        
+     }
 </script>
 
 <div class="page">
@@ -99,8 +84,11 @@
             </table>*@
             <div class="grid">
                 <div class="row">
-                    <div id="ImageDiv" class="span3 offset1" >
-                        <img id="inputImage" src="@Url.Content("~/Content/Images/noImage.png")" class="rounded polaroid" />
+                    <div id="ImageDiv" class="span3" >
+                        <div class="image-container" style="width:inherit; height:286px">
+                            <img id="inputImage" src="@Url.Content("~/Content/Images/noImage.png")" class="polaroid" />
+                            <input id="imgName" type="text" value="noImage" style="visibility:hidden" />
+                        </div>
                     </div>
                     <div id="ajaxUploadForm" class="span3" style="padding-top:40px">
                         <input type="file" name="file_upload" id="file_upload" style=" width: inherit; "/>
@@ -112,7 +100,7 @@
                                 <a href="#" class="heading bg-gray fg-white collapsed">Advanced Search</a>
                                 <div class="content">
                                     <div class="input-control text" data-role="input-control">
-                                        <input type="text" placeholder="type text">
+                                        <input id="userNameTag" type="text" placeholder="type text">
                                         @*<button class="btn-clear" tabindex="-1" style="background:"></button>*@
                                         @*<img class="btn-clear" tabindex="-1" src="@Url.Content("~/Content/Images/cancel.png")" style="height:10px"/>*@
                                     </div>
@@ -121,39 +109,22 @@
                         </div>
 
                         <button onclick="RecognizeImage();" style=" width: inherit; height: 30px;">Recognize</button>
+                        <div style="width:inherit; text-align:center;">
+                            <img id="WaitAnimation" src="@Url.Content("~/Content/Images/loading.gif")" style="display:none; margin-top:10px; height:90px;" />
+                        </div>
                         <div id="uploaded">
                         </div>
                     </div>
-                    <div class="span3 offset1">
-                        <img id="BestMatchedImage" src="@Url.Content("~/Content/Images/noImage.png")" class="rounded polaroid" />
+                    <div class="span6" style="text-align:center">
+                        <div id="AttributeTable"></div>
                     </div>
                 </div>
             </div>
 
             <div class="progress-bar" data-role="progress-bar" data-value="100" data-color="#ccc" style="margin-top:10px; margin-bottom:10px"></div>
             
-            <div id="ImgResultPanel">
-            @*<table>
-                <tr>
-                    <td style="border:0;">
-                        <div id="ImgResultPanel">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="border:0">
-                        <div style="margin-bottom:10px">
-                            <a href="#">
-                               <img src="@Url.Content("~/Content/Images/leftArrow.png")" style="margin-top: 10px; width:40px;" />
-                            </a>
-                            <a href="#">
-                               <img src="@Url.Content("~/Content/Images/rightArrow.png")" style="margin-top: 10px; width:40px;" />
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            </table>*@
-        </div>
+            <div id="ImgResultPanel"></div>
+            
     </div>
 </div>
 </div>
