@@ -159,6 +159,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AttributeModel.cs" />
+    <Compile Include="Models\AttributesListModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\PageImageDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
