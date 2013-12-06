@@ -34,5 +34,9 @@ namespace Thahavuru_WEB.Models
 
         [DataMember]
         public List<IndClass> IndClasses { get; set; }
+
+        public bool IsUpDisabled { get; set; }
+
+        public bool IsDownDisabled { get; set; }
     }
 }
