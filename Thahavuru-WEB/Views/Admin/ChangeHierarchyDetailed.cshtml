@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "ChangeHierarchyDetailed";
+}
+
+@using Thahavuru_WEB.Models
+
+@*<script src="@Url.Content("~/Content/Script/Metro/metro-accordion.js")"></script>*@
+<script type="text/javascript">
+
+    function addToDecisionTree(attId)
+    {
+        $.get("/Admin/AddAttributeDT", { attId: attId }, function () {
+            location.reload();
+        });
+    }
+
+    function down(attId)
+    {
+        $.get("/Admin/MoveDownAttributeDT", { attId: attId }, function () {
+            location.reload();
+        });
+    }
+
+    function up(attId)
+    {
+        $.get("/Admin/MoveUpAttributeDT", { attId: attId }, function () {
+            location.reload();
+        });
+    }
+    function removeBC(attId)
+    {
+        $.get("/Admin/RemoveAttributeFromDT", { attId: attId }, function () {
+            location.reload();
+        });
+    }
+
+</script>
+@if(Model != null){
+<div class ="grid">                    
+    <div class="row">
+        <div class="span12">
+            <div class="span9"><h1>Change Hierarchy</h1></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span5">
+            <div id="table1" height: auto;">
+                <table class="table hovered border myClass">
+                    <thead >
+                        <tr class="bg-dark">
+                            <th class="text-left">Attributes List</th>
+                            <th class="text-right"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.AttributesNotInHierarchy)
+                        {
+                            <tr>
+                                <td class="text-left" ><label>@item.Name</label>@*<input style="display:none" id="attId@(item.AttributeId)" value="@item.AttributeId"/>*@</td>
+                                <td class="text-right" style="width: 200px;"><button id="addToDTBtn@(item.AttributeId)" onclick="addToDecisionTree(@item.AttributeId)">Add Desision Tree</button></td>
+                            </tr>
+                        }
+                   </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="span7">
+            <table class="table hovered border myClass">
+                <thead >
+                    <tr class="bg-dark">
+                        <th class="text-left">Attributes in Decision Tree</th>
+                        <th class="text-right"></th>
+                        <th class="text-right"></th>
+                        <th class="text-right"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.AttributesInHierarchy)
+                    {
+                        <tr>
+                            <td class="text-left" ><label>@item.Name</label></td>
+                            <td class="text-right" style="width: 30px;" >
+                                @if (item.IsDownDisabled)
+                                {
+                                    <button disabled="disabled" onclick="down(@item.AttributeId)">Down</button>
+                                }else 
+                                {
+                                    <button onclick="down(@item.AttributeId)">Down</button>
+                                }
+
+                            </td>
+                            <td class="text-right" style="width: 30px;">
+                                @if (item.IsUpDisabled)
+                                {
+                                    <button disabled="disabled" onclick="up(@item.AttributeId)">Up</button>
+                                }else
+                                {
+                                    <button onclick="up(@item.AttributeId)">Up</button>
+                                }
+                            </td>
+                            <td class="text-right" style="width: 200px;"><button id="removeBtn@(item.AttributeId)" onclick="removeBC(@item.AttributeId)">Remove</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+}

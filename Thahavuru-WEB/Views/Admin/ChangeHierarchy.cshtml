@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "ChangeHierarchy";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="product" content="Metro UI CSS Framework">
+    <meta name="description" content="Simple responsive css framework">
+    <meta name="author" content="Sergey S. Pimenov, Ukraine, Kiev">
+
+    <link href="@Url.Content("~/Content/CSS/Metro/metro-bootstrap.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CSS/Metro/metro-bootstrap-responsive.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CSS/Metro/docs.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CSS/Prettify/prettify.css")" rel="stylesheet">
+
+    <!-- Load JavaScript Libraries -->
+    <script src="@Url.Content("~/Content/Script/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Script/JQuery/jquery.widget.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Script/JQuery/jquery.mousewheel.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Script/Prettify/prettify.js")" type="text/javascript"></script>
+    
+    <!-- Metro UI CSS JavaScript plugins -->
+    <script src="@Url.Content("~/Content/Script/Metro/metro-loader.js")" type="text/javascript"></script>
+   
+    <!-- Local JavaScript -->
+    <script src="@Url.Content("~/Content/Script/Docs/docs.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Script/Metro/metro-accordion.js")"></script>
+
+    <title>THAHAVURU</title>
+    
+    @*<script type="text/javascript">
+
+        function addToDecisionTree(attId) {
+            $.post("/Admin/AddAttributeDT", { attId: attId }, function () {
+            });
+        }
+
+        function down(attId) {
+            $.post("/Admin/MoveDownAttributeDT", { attId: attId }, function () {
+            });
+        }
+
+        function up(attId) {
+            $.post("/Admin/MoveUpAttributeDT", { attId: attId }, function () {
+            });
+        }
+        function removeBC(attId) {
+            $.post("/Admin/RemoveAttributeFromDT", { attId: attId }, function () {
+            });
+        }
+
+    </script>*@
+</head>
+<body class="metro">
+    <header class="bg-dark" data-load="@Url.Content("Header")"></header>
+    <div>
+        <div class="page">
+            <div class="page-region">
+                <div class="page-region-content">
+
+                    <div class="grid">
+                        
+                        <div class="row">
+                            <div class="span12" data-load="@Url.Content("ChangeHierarchyDetailed")">
+
+                                @*@if(Model != null){
+                                    <div class ="grid">                    
+                                        <div class="row">
+                                            <div class="span12">
+                                                <div class="span9"><h1>Change Hierarchy</h1></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="span5">
+                                                <div id="table1" height: auto;">
+                                                    <table class="table hovered border myClass">
+                                                        <thead >
+                                                            <tr class="bg-dark">
+                                                                <th class="text-left">Attributes List</th>
+                                                                <th class="text-right"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var item in Model.AttributesNotInHierarchy)
+                                                            {
+                                                                <tr>
+                                                                    <td class="text-left" ><label>@item.Name</label></td>
+                                                                    <td class="text-right" style="width: 200px;"><button id="addToDTBtn@(item.AttributeId)" onclick="addToDecisionTree(@item.AttributeId)">Add Desision Tree</button></td>
+                                                                </tr>
+                                                            }
+                                                       </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="span7">
+                                                <table class="table hovered border myClass">
+                                                    <thead >
+                                                        <tr class="bg-dark">
+                                                            <th class="text-left">Attributes in Decision Tree</th>
+                                                            <th class="text-right"></th>
+                                                            <th class="text-right"></th>
+                                                            <th class="text-right"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model.AttributesInHierarchy)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-left" ><label>@item.Name</label></td>
+                                                                <td class="text-right" style="width: 30px;" >
+                                                                    @if (item.IsDownDisabled)
+                                                                    {
+                                                                        <button disabled="disabled" onclick="down(@item.AttributeId)">Down</button>
+                                                                    }else 
+                                                                    {
+                                                                        <button onclick="down(@item.AttributeId)">Down</button>
+                                                                    }
+
+                                                                </td>
+                                                                <td class="text-right" style="width: 30px;">
+                                                                    @if (item.IsUpDisabled)
+                                                                    {
+                                                                        <button disabled="disabled" onclick="up(@item.AttributeId)">Up</button>
+                                                                    }else
+                                                                    {
+                                                                        <button onclick="up(@item.AttributeId)">Up</button>
+                                                                    }
+                                                                </td>
+                                                                <td class="text-right" style="width: 200px;"><button id="removeBtn@(item.AttributeId)" onclick="removeBC(@item.AttributeId)">Remove</button></td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    }*@
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Footer" data-load="@Url.Content("Footer")"></div>
+    <script src="js/hitua.js"></script>
+
+</body>
+</html>

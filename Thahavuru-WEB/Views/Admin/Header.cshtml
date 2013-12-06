@@ -18,10 +18,11 @@
             <a class="dropdown-toggle" href="#">Options</a>
             <ul class="dropdown-menu" id="base-submenu" data-role="dropdown">
                 <li><a href="@Url.Action("AddNewAttribute", "Admin")">Add New Attribute</a></li>
+                <li><a href="@Url.Action("ChangeHierarchy","Admin")">Change Hierachy</a></li>
             </ul>
         </div>
 
-        <div class="element" style="line-height:40px">
+        @*<div class="element" style="line-height:40px">
             <a class="dropdown-toggle"  href="#">News</a>
             <ul class="dropdown-menu" id="components-submenu" data-role="dropdown">
                 <li><a href="tiles.html">Tiles</a></li>
@@ -80,9 +81,9 @@
                 <li class="disabled"><a href="cards.html">Deck of cards</a></li>
 -->
             </ul>
-        </div>
+        </div>*@
 
-        <div class="element" style="line-height:40px">
+        @*<div class="element" style="line-height:40px">
             <a class="dropdown-toggle"  href="#">Publications</a>
             <ul class="dropdown-menu" id="community-submenu" data-role="dropdown">
                 <li class="disabled"><a href="http://blog.metroui.net">Blog</a></li>
@@ -90,7 +91,7 @@
                 <li class="divider"></li>
                 <li><a href="https://github.com/olton/Metro-UI-CSS">Github</a></li>
             </ul>
-        </div>
+        </div>*@
 
        @* <div class="element">
             <a href="one-page-example.html" class="fg-yellow">Big Example</a>
@@ -101,7 +102,7 @@
         <span class="element-divider place-right" style="height:70px"></span>
         <a title="Git Repo" href="https://github.com/dioode/Thavuru-Library" class="element place-right"><img src="@Url.Content("~/Content/Images/GitHub.png")" style="height:40px;"/></span></a>
         <span class="element-divider place-right" style="height:70px"></span>
-        <a title="Home" href="@Url.Content("Home")" class="element place-right"><img src="@Url.Content("~/Content/Images/Home.png")" style="height:40px;"/></span></a>
+        <a title="Home" href="@Url.Action("Index","Home")" class="element place-right"><img src="@Url.Content("~/Content/Images/Home.png")" style="height:40px;"/></span></a>
         <span class="element-divider place-right" style="height:70px"></span>
         @*<div class="element place-right" title="GitHub Forks"><span class="icon-share-2"></span> <span class="github-forks">0</span></div>
         <span class="element-divider place-right" style="height:70px"></span>*@
