@@ -138,13 +138,15 @@
     </Reference>
     <Reference Include="Thahavuru.DataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Thavuru-Library\Thahavuru.DataAccessLayer\bin\Debug\Thahavuru.DataAccessLayer.dll</HintPath>
+      <HintPath>..\..\Thahavuru.Libraries\Thahavuru.DataAccessLayer\bin\Debug\Thahavuru.DataAccessLayer.dll</HintPath>
     </Reference>
-    <Reference Include="Thahavuru.Resources">
-      <HintPath>..\..\Thavuru-Library\Thahavuru.Resources\bin\Debug\Thahavuru.Resources.dll</HintPath>
+    <Reference Include="Thahavuru.Resources, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Thahavuru.Libraries\Thahavuru.Resources\bin\Debug\Thahavuru.Resources.dll</HintPath>
     </Reference>
-    <Reference Include="Thahavuru.Techniques">
-      <HintPath>..\..\Thavuru-Library\Thahavuru.Techniques\bin\Debug\Thahavuru.Techniques.dll</HintPath>
+    <Reference Include="Thahavuru.Techniques, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Thahavuru.Libraries\Thahavuru.Techniques\bin\Debug\Thahavuru.Techniques.dll</HintPath>
     </Reference>
     <Reference Include="ZedGraph">
       <HintPath>C:\Emgu\emgucv-windows-universal-gpu 2.4.9.1847\bin\ZedGraph.dll</HintPath>

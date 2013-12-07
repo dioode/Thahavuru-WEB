@@ -87,7 +87,7 @@ namespace Thahavuru_WEB.Controllers
 
         public ActionResult AddNewAttributeDetailed()
         {
-            DataAccessSingleton dAS = new DataAccessSingleton();
+            DataAccessSingleton dAS = DataAccessSingleton.Instance;
             List<FaceAttribute> attList = dAS.GetAllAttributes();
 
             AttributesListModel aLM = new AttributesListModel();
@@ -117,7 +117,7 @@ namespace Thahavuru_WEB.Controllers
 
         public ActionResult ChangeHierarchyDetailed() 
         {
-            DataAccessSingleton das = new DataAccessSingleton();
+            DataAccessSingleton das = DataAccessSingleton.Instance;
             List<FaceAttribute> allAttributes = das.GetAllAttributes();
             FaceAttributeHiearachy fah = das.GetFaceAttributeHierarchy();
             
@@ -214,7 +214,7 @@ namespace Thahavuru_WEB.Controllers
         //[HttpPost]
         public JsonResult AddAttributeDT(int attId)
         {
-            DataAccessSingleton das = new DataAccessSingleton();
+            var das = DataAccessSingleton.Instance;
             bool success = das.AddNewAttributeToHierarchy(attId);
             
             //return RedirectToAction("ChangeHierarchy");
@@ -224,7 +224,7 @@ namespace Thahavuru_WEB.Controllers
         //[HttpPost]
         public JsonResult RemoveAttributeFromDT(int attId)
         {
-            DataAccessSingleton das = new DataAccessSingleton();
+            DataAccessSingleton das = DataAccessSingleton.Instance;
             bool success = das.RemoveAttributeFromHierarchy(attId);
 
             //return RedirectToAction("ChangeHierarchy");
@@ -234,7 +234,7 @@ namespace Thahavuru_WEB.Controllers
         //[HttpPost]
         public JsonResult MoveUpAttributeDT(int attId)
         {
-            DataAccessSingleton das = new DataAccessSingleton();
+            DataAccessSingleton das = DataAccessSingleton.Instance;
             bool success = das.MoveUpHierarchy(attId);
 
             //return RedirectToAction("ChangeHierarchy");
@@ -244,7 +244,7 @@ namespace Thahavuru_WEB.Controllers
         //[HttpPost]
         public JsonResult MoveDownAttributeDT(int attId)
         {
-            DataAccessSingleton das = new DataAccessSingleton();
+            DataAccessSingleton das = DataAccessSingleton.Instance;
             bool success = das.MoveDownHierarchy(attId);
             //return RedirectToAction("ChangeHierarchy");
             return Json(success, JsonRequestBehavior.AllowGet);

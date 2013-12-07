@@ -164,7 +164,7 @@ namespace Test_Web.Controllers
 
             if (pageData.AdvancedSearchUserName != null && pageData.AdvancedSearchUserName.Trim() != "")
             {
-                DataAccessSingleton dAS = new DataAccessSingleton();
+                DataAccessSingleton dAS = DataAccessSingleton.Instance;
                 List<PersonVM> persons = dAS.GetPersonByName(pageData.AdvancedSearchUserName);
                 if (persons != null && persons.Count != 0)
                 {
